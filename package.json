@@ -1,0 +1,34 @@
+{
+  "name": "web_puzzles",
+  "version": "0.0.1",
+  "description": "Interactive puzzle for web",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bryukh/Puzzles.git"
+  },
+  "keywords": [
+    "puzzle"
+  ],
+  "author": "Valentin Bryukhanov (http://bryukh.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Bryukh/Puzzles/issues"
+  },
+  "homepage": "https://github.com/Bryukh/Puzzles#readme",
+  "devDependencies": {
+    "babel": "^5.8.29",
+    "babel-loader": "^5.3.2",
+    "css-loader": "^0.21.0",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.2"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.5",
+    "jquery": "^2.1.4",
+    "snapsvg": "^0.4.0"
+  }
+}

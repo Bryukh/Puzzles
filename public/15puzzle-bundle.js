@@ -24,6 +24,8 @@ webpackJsonp([0,1],[
 
 	__webpack_require__(3);
 
+	__webpack_require__(7);
+
 	var Puzzle = (function () {
 	    function Puzzle(containerId, options) {
 	        _classCallCheck(this, Puzzle);
@@ -47,8 +49,10 @@ webpackJsonp([0,1],[
 	        key: 'create',
 	        value: function create() {
 	            this.prepareSvg();
+
 	            var s = (0, _snapsvg2['default'])("#puzzle_svg"),
 	                size = this.cfg.chipSize * 4 + this.cfg.outPadding * 2 + this.cfg.inPadding * 3;
+	            this.container.style.height = size + 2 * this.cfg.outPadding + "px";
 	            s.attr({ width: size + "px", height: size + "px" });
 	            s.rect(0, 0, size, size).addClass("back");
 	        }
@@ -87,7 +91,7 @@ webpackJsonp([0,1],[
 	// See the License for the specific language governing permissions and
 	// limitations under the License.
 	// 
-	// public: 2015-04-07
+	// build: 2015-04-07
 
 	// Copyright (c) 2013 Adobe Systems Incorporated. All rights reserved.
 	// 
@@ -17101,7 +17105,7 @@ webpackJsonp([0,1],[
 			callback = params;
 			params = undefined;
 
-		// Otherwise, public a param string
+		// Otherwise, build a param string
 		} else if ( params && typeof params === "object" ) {
 			type = "POST";
 		}
@@ -17476,8 +17480,8 @@ webpackJsonp([0,1],[
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./15puzzle.scss", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./15puzzle.scss");
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./_common.scss", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./_common.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -17495,7 +17499,7 @@ webpackJsonp([0,1],[
 
 
 	// module
-	exports.push([module.id, "/* Coolors Exported Palette - coolors.co/eaeaea-6bb2a0-a5ffd6-ffa69e-ff6868 */\n.Puzzle15 .back {\n  fill: #eaeaea; }\n", ""]);
+	exports.push([module.id, ".puzzle-container {\n  height: 100%;\n  width: 100%;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  margin: auto; }\n", ""]);
 
 	// exports
 
@@ -17808,6 +17812,46 @@ webpackJsonp([0,1],[
 		if(oldSrc)
 			URL.revokeObjectURL(oldSrc);
 	}
+
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(8);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(6)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./15puzzle.scss", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./15puzzle.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(5)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "/* Coolors Exported Palette - coolors.co/eaeaea-6bb2a0-a5ffd6-ffa69e-ff6868 */\n.Puzzle15 .back {\n  fill: #eaeaea; }\n", ""]);
+
+	// exports
 
 
 /***/ }

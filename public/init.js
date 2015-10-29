@@ -76,7 +76,7 @@
 /******/ 			script.charset = 'utf-8';
 /******/ 			script.async = true;
 
-/******/ 			script.src = __webpack_require__.p + "" + chunkId + ".build/" + ({"0":"15-puzzle"}[chunkId]||chunkId) + "-bundle.js";
+/******/ 			script.src = __webpack_require__.p + "" + chunkId + ".public/" + ({"0":"15puzzle"}[chunkId]||chunkId) + "-bundle.js";
 /******/ 			head.appendChild(script);
 /******/ 		}
 /******/ 	};

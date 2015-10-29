@@ -2,9 +2,11 @@ var webpack = require("webpack");
 
 module.exports = {
 
-    entry: { "15-puzzle": "./puzzles/15-puzzle/15-puzzle.js"},
-    output: { filename: "build/[name]-bundle.js" },
-    plugins: [ new webpack.optimize.CommonsChunkPlugin("init", "build/init.js", Infinity) ],
+    entry: {
+        "15puzzle": "./src/puzzles/scripts/15puzzle.js"
+    },
+    output: { filename: "public/[name]-bundle.js" },
+    plugins: [ new webpack.optimize.CommonsChunkPlugin("init", "public/init.js", Infinity) ],
     module: {
         loaders: [
             {
@@ -19,6 +21,10 @@ module.exports = {
             {
                 test: /\.css$/,
                 loader: "style-loader!css-loader"
+            },
+            {
+                test: /\.scss$/,
+                loader: "style!css!sass"
             }
         ]
     }

@@ -7,13 +7,17 @@
   }
 
   .chip {
+
+    cursor: default;
     .chip-back {
       fill: $colorLightRed;
+      transition-duration: 2s;
     }
     .chip-edge {
       stroke: $colorMiddleRed;
       stroke-width: 10;
       fill: none;
+      transition-duration: 2s;
     }
     .chip-numb {
       font-family: $fontFamily;
@@ -22,8 +26,14 @@
       fill: $colorDarkRed;
       text-anchor: middle;
       alignment-baseline: central;
+      transition-duration: 2s;
     }
   }
+  
+  .chip.active {
+    cursor: pointer;
+  }
+
   .chip.correct {
     .chip-back {
       fill: $colorLightGreen;

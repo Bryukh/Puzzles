@@ -13,7 +13,8 @@ class Puzzle {
             chipSize: 100,
             outPadding: 10,
             inPadding: 5,
-            cornerR: 5
+            cornerR: 5,
+            stepTime: 500
         };
     }
 
@@ -35,9 +36,14 @@ class Puzzle {
         this.s.rect(0, 0, this.cfg.size, this.cfg.size, this.cfg.cornerR).addClass("back");
 
         // Chips
+        this.chips = [];
+        this.state = {};
         for (let i = 1; i < N * N; i++) {
-            this.makeChip(i, i);
+            this.chips[i] = this.makeChip(i, i);
+            this.state[i] = i;
         }
+        this.free = 16;
+        this.bindEvents();
     }
 
     makeChip(number, position) {
@@ -69,9 +75,59 @@ class Puzzle {
         if (number === position) {
             chip.addClass("correct");
         }
-        //chip.mark = number;
+        chip.number = number;
         chip.attr("data-number", number);
+        chip.data({x: x, y: y});
+
+        return chip;
     }
+
+    bindEvents() {
+        var nears = {
+            up: this.free > 4 ? this.free - 4 : null,
+            down: this.free < 13 ? this.free + 4 : null,
+            right: this.free % 4 !== 0 ? this.free + 1 : null,
+            left: this.free % 4 !== 1 ? this.free - 1 : null
+        };
+        let shift = this.cfg.chipSize + this.cfg.inPadding,
+            dirShifts = {
+                up: [0, shift],
+                down: [0, -shift],
+                left: [shift, 0],
+                right: [-shift, 0]
+            };
+        for (let k in nears) {
+            if (!nears.hasOwnProperty(k) || !nears[k]) {continue}
+            let pos = nears[k],
+                numb = this.state[pos],
+                chip = this.chips[numb],
+                obj = this;
+            chip.addClass("active");
+            chip.click(function (e) {
+                let x = chip.data().x,
+                    y = chip.data().y,
+                    vShift = dirShifts[k][1],
+                    hShift = dirShifts[k][0];
+                chip.animate({"transform": `t${hShift},${vShift}`}, 
+                    obj.cfg.stepTime,
+                    function () {
+                        this.bindEvents();
+                    }.bind(obj)
+                );
+                chip.data({x: x + hShift, y: y + vShift});
+                obj.state[obj.free] = numb;
+                obj.state[pos] = 0;
+                obj.free = pos;
+                for (let c = 1, C = N * N; c < C; c++) {
+                    let ch = obj.chips[c];
+                    ch.unclick();
+                    ch.removeClass("active");
+                }
+            })
+        }
+        
+    }
+
 
 }
 

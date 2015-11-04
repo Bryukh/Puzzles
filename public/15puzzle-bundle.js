@@ -37,7 +37,8 @@ webpackJsonp([0,1],[
 	            chipSize: 100,
 	            outPadding: 10,
 	            inPadding: 5,
-	            cornerR: 5
+	            cornerR: 5,
+	            stepTime: 500
 	        };
 	    }
 
@@ -62,9 +63,14 @@ webpackJsonp([0,1],[
 	            this.s.rect(0, 0, this.cfg.size, this.cfg.size, this.cfg.cornerR).addClass("back");
 
 	            // Chips
+	            this.chips = [];
+	            this.state = {};
 	            for (var i = 1; i < N * N; i++) {
-	                this.makeChip(i, i);
+	                this.chips[i] = this.makeChip(i, i);
+	                this.state[i] = i;
 	            }
+	            this.free = 16;
+	            this.bindEvents();
 	        }
 	    }, {
 	        key: 'makeChip',
@@ -81,8 +87,65 @@ webpackJsonp([0,1],[
 	            if (number === position) {
 	                chip.addClass("correct");
 	            }
-	            //chip.mark = number;
+	            chip.number = number;
 	            chip.attr("data-number", number);
+	            chip.data({ x: x, y: y });
+
+	            return chip;
+	        }
+	    }, {
+	        key: 'bindEvents',
+	        value: function bindEvents() {
+	            var _this = this;
+
+	            var nears = {
+	                up: this.free > 4 ? this.free - 4 : null,
+	                down: this.free < 13 ? this.free + 4 : null,
+	                right: this.free % 4 !== 0 ? this.free + 1 : null,
+	                left: this.free % 4 !== 1 ? this.free - 1 : null
+	            };
+	            var shift = this.cfg.chipSize + this.cfg.inPadding,
+	                dirShifts = {
+	                up: [0, shift],
+	                down: [0, -shift],
+	                left: [shift, 0],
+	                right: [-shift, 0]
+	            };
+
+	            var _loop = function (k) {
+	                if (!nears.hasOwnProperty(k) || !nears[k]) {
+	                    return 'continue';
+	                }
+	                var pos = nears[k],
+	                    numb = _this.state[pos],
+	                    chip = _this.chips[numb],
+	                    obj = _this;
+	                chip.addClass("active");
+	                chip.click(function (e) {
+	                    var x = chip.data().x,
+	                        y = chip.data().y,
+	                        vShift = dirShifts[k][1],
+	                        hShift = dirShifts[k][0];
+	                    chip.animate({ "transform": 't' + hShift + ',' + vShift }, obj.cfg.stepTime, (function () {
+	                        this.bindEvents();
+	                    }).bind(obj));
+	                    chip.data({ x: x + hShift, y: y + vShift });
+	                    obj.state[obj.free] = numb;
+	                    obj.state[pos] = 0;
+	                    obj.free = pos;
+	                    for (var c = 1, C = N * N; c < C; c++) {
+	                        var ch = obj.chips[c];
+	                        ch.unclick();
+	                        ch.removeClass("active");
+	                    }
+	                });
+	            };
+
+	            for (var k in nears) {
+	                var _ret = _loop(k);
+
+	                if (_ret === 'continue') continue;
+	            }
 	        }
 	    }]);
 
@@ -17877,7 +17940,7 @@ webpackJsonp([0,1],[
 
 
 	// module
-	exports.push([module.id, "/* Coolors Exported Palette - coolors.co/eaeaea-6bb2a0-a5ffd6-ffa69e-ff6868 */\n.puzzle-container {\n  height: 100%;\n  width: 100%;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  margin: auto; }\n\n.Puzzle15 .back {\n  fill: #eaeaea; }\n\n.Puzzle15 .chip .chip-back {\n  fill: #ffa69e; }\n\n.Puzzle15 .chip .chip-edge {\n  stroke: #FF7777;\n  stroke-width: 10;\n  fill: none; }\n\n.Puzzle15 .chip .chip-numb {\n  font-family: Roboto, sans-serif;\n  font-size: 60px;\n  font-weight: bold;\n  fill: #FF5154;\n  text-anchor: middle;\n  alignment-baseline: central; }\n\n.Puzzle15 .chip.correct .chip-back {\n  fill: #A5FFC7; }\n\n.Puzzle15 .chip.correct .chip-edge {\n  stroke: #11DB8D; }\n\n.Puzzle15 .chip.correct .chip-numb {\n  fill: #2DB773; }\n", ""]);
+	exports.push([module.id, "/* Coolors Exported Palette - coolors.co/eaeaea-6bb2a0-a5ffd6-ffa69e-ff6868 */\n.puzzle-container {\n  height: 100%;\n  width: 100%;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  margin: auto; }\n\n.Puzzle15 .back {\n  fill: #eaeaea; }\n\n.Puzzle15 .chip {\n  cursor: default; }\n  .Puzzle15 .chip .chip-back {\n    fill: #ffa69e;\n    transition-duration: 2s; }\n  .Puzzle15 .chip .chip-edge {\n    stroke: #FF7777;\n    stroke-width: 10;\n    fill: none;\n    transition-duration: 2s; }\n  .Puzzle15 .chip .chip-numb {\n    font-family: Roboto, sans-serif;\n    font-size: 60px;\n    font-weight: bold;\n    fill: #FF5154;\n    text-anchor: middle;\n    alignment-baseline: central;\n    transition-duration: 2s; }\n\n.Puzzle15 .chip.active {\n  cursor: pointer; }\n\n.Puzzle15 .chip.correct .chip-back {\n  fill: #A5FFC7; }\n\n.Puzzle15 .chip.correct .chip-edge {\n  stroke: #11DB8D; }\n\n.Puzzle15 .chip.correct .chip-numb {\n  fill: #2DB773; }\n", ""]);
 
 	// exports
 

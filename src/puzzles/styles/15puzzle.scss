@@ -1,7 +1,38 @@
 @import "palette";
+@import "common";
 
 .Puzzle15 {
   .back {
     fill: $colorGrey;
+  }
+
+  .chip {
+    .chip-back {
+      fill: $colorLightRed;
+    }
+    .chip-edge {
+      stroke: $colorMiddleRed;
+      stroke-width: 10;
+      fill: none;
+    }
+    .chip-numb {
+      font-family: $fontFamily;
+      font-size: 60px;
+      font-weight: bold;
+      fill: $colorDarkRed;
+      text-anchor: middle;
+      alignment-baseline: central;
+    }
+  }
+  .chip.correct {
+    .chip-back {
+      fill: $colorLightGreen;
+    }
+    .chip-edge {
+      stroke: $colorMiddleGreen;
+    }
+    .chip-numb {
+      fill: $colorDarkGreen;
+    }
   }
 }

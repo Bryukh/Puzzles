@@ -26,6 +26,8 @@ webpackJsonp([0,1],[
 
 	__webpack_require__(7);
 
+	var N = 4;
+
 	var Puzzle = (function () {
 	    function Puzzle(containerId, options) {
 	        _classCallCheck(this, Puzzle);
@@ -34,7 +36,8 @@ webpackJsonp([0,1],[
 	        this.cfg = {
 	            chipSize: 100,
 	            outPadding: 10,
-	            inPadding: 5
+	            inPadding: 5,
+	            cornerR: 5
 	        };
 	    }
 
@@ -50,11 +53,36 @@ webpackJsonp([0,1],[
 	        value: function create() {
 	            this.prepareSvg();
 
-	            var s = (0, _snapsvg2['default'])("#puzzle_svg"),
-	                size = this.cfg.chipSize * 4 + this.cfg.outPadding * 2 + this.cfg.inPadding * 3;
-	            this.container.style.height = size + 2 * this.cfg.outPadding + "px";
-	            s.attr({ width: size + "px", height: size + "px" });
-	            s.rect(0, 0, size, size).addClass("back");
+	            this.s = (0, _snapsvg2['default'])("#puzzle_svg");
+	            this.cfg.size = this.cfg.chipSize * 4 + this.cfg.outPadding * 2 + this.cfg.inPadding * 3;
+	            this.container.style.height = this.cfg.size + 2 * this.cfg.outPadding + "px";
+	            this.s.attr({ width: this.cfg.size + "px", height: this.cfg.size + "px" });
+
+	            // Background
+	            this.s.rect(0, 0, this.cfg.size, this.cfg.size, this.cfg.cornerR).addClass("back");
+
+	            // Chips
+	            for (var i = 1; i < N * N; i++) {
+	                this.makeChip(i, i);
+	            }
+	        }
+	    }, {
+	        key: 'makeChip',
+	        value: function makeChip(number, position) {
+	            var col = (position - 1) % 4,
+	                row = Math.floor((position - 1) / 4),
+	                x = this.cfg.outPadding + col * (this.cfg.inPadding + this.cfg.chipSize),
+	                y = this.cfg.outPadding + row * (this.cfg.inPadding + this.cfg.chipSize),
+	                chipBack = this.s.rect(x, y, this.cfg.chipSize, this.cfg.chipSize, this.cfg.cornerR * 2).addClass("chip-back"),
+	                chipEdge = this.s.rect(x + this.cfg.inPadding, y + +this.cfg.inPadding, this.cfg.chipSize - 2 * this.cfg.inPadding, this.cfg.chipSize - 2 * this.cfg.inPadding, this.cfg.cornerR).addClass("chip-edge"),
+	                chipNumb = this.s.text(x + this.cfg.chipSize / 2, y + this.cfg.chipSize / 2, String(number)).addClass("chip-numb");
+
+	            var chip = this.s.g(chipBack, chipEdge, chipNumb).addClass("chip");
+	            if (number === position) {
+	                chip.addClass("correct");
+	            }
+	            //chip.mark = number;
+	            chip.attr("data-number", number);
 	        }
 	    }]);
 
@@ -17849,7 +17877,7 @@ webpackJsonp([0,1],[
 
 
 	// module
-	exports.push([module.id, "/* Coolors Exported Palette - coolors.co/eaeaea-6bb2a0-a5ffd6-ffa69e-ff6868 */\n.Puzzle15 .back {\n  fill: #eaeaea; }\n", ""]);
+	exports.push([module.id, "/* Coolors Exported Palette - coolors.co/eaeaea-6bb2a0-a5ffd6-ffa69e-ff6868 */\n.puzzle-container {\n  height: 100%;\n  width: 100%;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  margin: auto; }\n\n.Puzzle15 .back {\n  fill: #eaeaea; }\n\n.Puzzle15 .chip .chip-back {\n  fill: #ffa69e; }\n\n.Puzzle15 .chip .chip-edge {\n  stroke: #FF7777;\n  stroke-width: 10;\n  fill: none; }\n\n.Puzzle15 .chip .chip-numb {\n  font-family: Roboto, sans-serif;\n  font-size: 60px;\n  font-weight: bold;\n  fill: #FF5154;\n  text-anchor: middle;\n  alignment-baseline: central; }\n\n.Puzzle15 .chip.correct .chip-back {\n  fill: #A5FFC7; }\n\n.Puzzle15 .chip.correct .chip-edge {\n  stroke: #11DB8D; }\n\n.Puzzle15 .chip.correct .chip-numb {\n  fill: #2DB773; }\n", ""]);
 
 	// exports
 

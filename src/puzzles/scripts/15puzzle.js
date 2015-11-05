@@ -9,9 +9,10 @@ class Puzzle {
     constructor(containerId, options) {
         this.container = document.getElementById(containerId);
         this.cfg = {
-            chipSize: 100,
+            chipSize: 95,
             outPadding: 10,
-            inPadding: 5,
+            inPadding: 10,
+            stroke: 5,
             cornerR: 5,
             stepTime: 500
         };
@@ -28,8 +29,7 @@ class Puzzle {
 
         this.s = Snap("#puzzle_svg");
         this.cfg.size = this.cfg.chipSize * 4 + this.cfg.outPadding * 2 + this.cfg.inPadding * 3;
-        this.container.style.height = (this.cfg.size + 2 * this.cfg.outPadding) + "px";
-        this.s.attr({width: this.cfg.size + "px", height: this.cfg.size + "px"});
+        this.s.attr({viewBox: `0 0 ${this.cfg.size} ${this.cfg.size}`});
 
         // Background
         this.s.rect(0, 0, this.cfg.size, this.cfg.size, this.cfg.cornerR).addClass("back");
@@ -38,7 +38,9 @@ class Puzzle {
         this.chips = [];
         this.state = {};
         for (let i = 1; i < N * N; i++) {
-            this.chips[i] = this.makeChip(i, i);
+            let chip = this.makeChip(i, i);
+            chip.addClass("correct");
+            this.chips[i] = chip;
             this.state[i] = i;
         }
         this.free = 16;
@@ -56,27 +58,33 @@ class Puzzle {
                 this.cfg.chipSize,
                 this.cfg.chipSize,
                 this.cfg.cornerR * 2)
+                .attr({"fill": "none"})
                 .addClass("chip-back"),
             chipEdge = this.s.rect(
-                x + this.cfg.inPadding,
-                y +  + this.cfg.inPadding,
-                this.cfg.chipSize - 2 * this.cfg.inPadding,
-                this.cfg.chipSize  - 2 * this.cfg.inPadding,
+                x + this.cfg.stroke,
+                y + this.cfg.stroke,
+                this.cfg.chipSize - 2 * this.cfg.stroke,
+                this.cfg.chipSize  - 2 * this.cfg.stroke,
                 this.cfg.cornerR)
                 .addClass("chip-edge"),
             chipNumb = this.s.text(
                 x + this.cfg.chipSize / 2,
                 y + this.cfg.chipSize / 2,
                 String(number))
-                .addClass("chip-numb");
+                .addClass("chip-numb"),
+            f = this.s.filter(Snap.filter.shadow(0, 0, 8, "#000000")),
+            chipGlow = this.s.rect(
+                x + this.cfg.stroke,
+                y + this.cfg.stroke,
+                this.cfg.chipSize - 2 * this.cfg.stroke,
+                this.cfg.chipSize  - 2 * this.cfg.stroke,
+                this.cfg.cornerR).attr({filter: f}).addClass("chip-glow");
 
-        var chip = this.s.g(chipBack, chipEdge, chipNumb).addClass("chip");
-        if (number === position) {
-            chip.addClass("correct");
-        }
+        var chip = this.s.g(chipGlow, chipBack, chipEdge, chipNumb).addClass("chip");
+
         chip.number = number;
         chip.attr("data-number", number);
-        chip.data({x: x, y: y});
+        chip.data({x: x, y: y, xShift: 0, yShift: 0});
 
         return chip;
     }
@@ -99,22 +107,33 @@ class Puzzle {
             if (!nears.hasOwnProperty(k) || !nears[k]) {continue}
             let pos = nears[k],
                 numb = this.state[pos],
-                chip = this.chips[numb],
-                obj = this;
+                chip = this.chips[numb];
             chip.addClass("active");
             chip.click((e) => {
-                let x = chip.data().x,
-                    y = chip.data().y,
-                    vShift = dirShifts[k][1],
-                    hShift = dirShifts[k][0];
-                chip.animate({"transform": `t${hShift},${vShift}`}, 
+                let chipData = chip.data(),
+                    x = chipData.x,
+                    y = chipData.y,
+                    hShift = chipData.xShift + dirShifts[k][0],
+                    vShift = chipData.yShift + dirShifts[k][1];
+                chip.animate({"transform": `t${hShift},${vShift}`},
                     this.cfg.stepTime,
-                    () => this.bindEvents()
+                    () => {
+                        this.bindEvents();
+                        chip.data({xShift: hShift, yShift: vShift});
+                    }
                 );
+
                 chip.data({x: x + hShift, y: y + vShift});
                 this.state[this.free] = numb;
                 this.state[pos] = 0;
+                if (numb == this.free) {
+                    chip.addClass("correct");
+                }
+                else {
+                    chip.removeClass("correct");
+                }
                 this.free = pos;
+
                 for (let c = 1, C = N * N; c < C; c++) {
                     let ch = this.chips[c];
                     ch.unclick();

@@ -11,38 +11,55 @@
     cursor: default;
     .chip-back {
       fill: $colorLightRed;
-      transition-duration: 2s;
+      transition-duration: 1s;
+      transition-property: fill;
     }
     .chip-edge {
       stroke: $colorMiddleRed;
       stroke-width: 10;
       fill: none;
-      transition-duration: 2s;
+      transition-duration: 1s;
+      transition-property: stroke;
+
+    }
+    .chip-glow {
+      stroke-width: 10;
+      display: none;
+
     }
     .chip-numb {
       font-family: $fontFamily;
       font-size: 60px;
-      font-weight: bold;
+      //font-weight: bold;
       fill: $colorDarkRed;
       text-anchor: middle;
       alignment-baseline: central;
-      transition-duration: 2s;
+      transition-duration: 1s;
+      transition-property: fill;
+
     }
+
   }
   
   .chip.active {
     cursor: pointer;
+    .chip-glow {
+      display: block;
+    }
   }
 
   .chip.correct {
     .chip-back {
       fill: $colorLightGreen;
+
     }
     .chip-edge {
       stroke: $colorMiddleGreen;
+
     }
     .chip-numb {
       fill: $colorDarkGreen;
+
     }
   }
 }

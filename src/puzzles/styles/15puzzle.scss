@@ -1,6 +1,8 @@
 @import "palette";
 @import "common";
 
+$stepTime: 200ms;
+
 .Puzzle15 {
   .back {
     fill: $colorGrey;
@@ -11,14 +13,14 @@
     cursor: default;
     .chip-back {
       fill: $colorLightRed;
-      transition-duration: 1s;
+      transition-duration: $stepTime;
       transition-property: fill;
     }
     .chip-edge {
       stroke: $colorMiddleRed;
       stroke-width: 10;
       fill: none;
-      transition-duration: 1s;
+      transition-duration: $stepTime;
       transition-property: stroke;
 
     }
@@ -34,7 +36,7 @@
       fill: $colorDarkRed;
       text-anchor: middle;
       alignment-baseline: central;
-      transition-duration: 1s;
+      transition-duration: $stepTime;
       transition-property: fill;
 
     }

@@ -37,7 +37,7 @@ webpackJsonp([0,1],[
 	            inPadding: 10,
 	            stroke: 5,
 	            cornerR: 5,
-	            stepTime: 500
+	            stepTime: 200
 	        };
 	    }
 
@@ -17598,7 +17598,7 @@ webpackJsonp([0,1],[
 	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Roboto);", ""]);
 
 	// module
-	exports.push([module.id, "/* Coolors Exported Palette - coolors.co/eaeaea-6bb2a0-a5ffd6-ffa69e-ff6868 */\n.puzzle-container {\n  height: auto;\n  width: 100%; }\n  .puzzle-container svg {\n    height: 100%;\n    width: 100%; }\n\n.Puzzle15 .back {\n  fill: #eaeaea; }\n\n.Puzzle15 .chip {\n  cursor: default; }\n  .Puzzle15 .chip .chip-back {\n    fill: #ffa69e;\n    transition-duration: 1s;\n    transition-property: fill; }\n  .Puzzle15 .chip .chip-edge {\n    stroke: #FF7777;\n    stroke-width: 10;\n    fill: none;\n    transition-duration: 1s;\n    transition-property: stroke; }\n  .Puzzle15 .chip .chip-glow {\n    stroke-width: 10;\n    display: none; }\n  .Puzzle15 .chip .chip-numb {\n    font-family: \"Roboto\", sans-serif;\n    font-size: 60px;\n    fill: #FF5154;\n    text-anchor: middle;\n    alignment-baseline: central;\n    transition-duration: 1s;\n    transition-property: fill; }\n\n.Puzzle15 .chip.active {\n  cursor: pointer; }\n  .Puzzle15 .chip.active .chip-glow {\n    display: block; }\n\n.Puzzle15 .chip.correct .chip-back {\n  fill: #A5FFC7; }\n\n.Puzzle15 .chip.correct .chip-edge {\n  stroke: #11DB8D; }\n\n.Puzzle15 .chip.correct .chip-numb {\n  fill: #2DB773; }\n", ""]);
+	exports.push([module.id, "/* Coolors Exported Palette - coolors.co/eaeaea-6bb2a0-a5ffd6-ffa69e-ff6868 */\n.puzzle-container {\n  height: auto;\n  width: 100%; }\n  .puzzle-container svg {\n    height: 100%;\n    width: 100%; }\n\n.Puzzle15 .back {\n  fill: #eaeaea; }\n\n.Puzzle15 .chip {\n  cursor: default; }\n  .Puzzle15 .chip .chip-back {\n    fill: #ffa69e;\n    transition-duration: 200ms;\n    transition-property: fill; }\n  .Puzzle15 .chip .chip-edge {\n    stroke: #FF7777;\n    stroke-width: 10;\n    fill: none;\n    transition-duration: 200ms;\n    transition-property: stroke; }\n  .Puzzle15 .chip .chip-glow {\n    stroke-width: 10;\n    display: none; }\n  .Puzzle15 .chip .chip-numb {\n    font-family: \"Roboto\", sans-serif;\n    font-size: 60px;\n    fill: #FF5154;\n    text-anchor: middle;\n    alignment-baseline: central;\n    transition-duration: 200ms;\n    transition-property: fill; }\n\n.Puzzle15 .chip.active {\n  cursor: pointer; }\n  .Puzzle15 .chip.active .chip-glow {\n    display: block; }\n\n.Puzzle15 .chip.correct .chip-back {\n  fill: #A5FFC7; }\n\n.Puzzle15 .chip.correct .chip-edge {\n  stroke: #11DB8D; }\n\n.Puzzle15 .chip.correct .chip-numb {\n  fill: #2DB773; }\n", ""]);
 
 	// exports
 

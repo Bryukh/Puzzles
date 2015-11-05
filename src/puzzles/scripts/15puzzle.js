@@ -14,7 +14,7 @@ class Puzzle {
             inPadding: 10,
             stroke: 5,
             cornerR: 5,
-            stepTime: 500
+            stepTime: 200
         };
     }
 

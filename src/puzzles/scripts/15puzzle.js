@@ -109,7 +109,7 @@ class Puzzle {
                 numb = this.state[pos],
                 chip = this.chips[numb];
             chip.addClass("active");
-            chip.click((e) => {
+            chip.mousedown((e) => {
                 let chipData = chip.data(),
                     x = chipData.x,
                     y = chipData.y,
@@ -136,7 +136,7 @@ class Puzzle {
 
                 for (let c = 1, C = N * N; c < C; c++) {
                     let ch = this.chips[c];
-                    ch.unclick();
+                    ch.unmousedown();
                     ch.removeClass("active");
                 }
             })

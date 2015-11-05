@@ -120,7 +120,7 @@ webpackJsonp([0,1],[
 	                    numb = _this.state[pos],
 	                    chip = _this.chips[numb];
 	                chip.addClass("active");
-	                chip.click(function (e) {
+	                chip.mousedown(function (e) {
 	                    var chipData = chip.data(),
 	                        x = chipData.x,
 	                        y = chipData.y,
@@ -143,7 +143,7 @@ webpackJsonp([0,1],[
 
 	                    for (var c = 1, C = N * N; c < C; c++) {
 	                        var ch = _this.chips[c];
-	                        ch.unclick();
+	                        ch.unmousedown();
 	                        ch.removeClass("active");
 	                    }
 	                });

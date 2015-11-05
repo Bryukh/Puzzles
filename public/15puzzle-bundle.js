@@ -22,7 +22,7 @@ webpackJsonp([0,1],[
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	__webpack_require__(7);
+	__webpack_require__(3);
 
 	var N = 4;
 
@@ -17554,8 +17554,46 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 3 */,
-/* 4 */,
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(4);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(6)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./15puzzle.scss", function() {
+				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./15puzzle.scss");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(5)();
+	// imports
+	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Roboto);", ""]);
+
+	// module
+	exports.push([module.id, "/* Coolors Exported Palette - coolors.co/eaeaea-6bb2a0-a5ffd6-ffa69e-ff6868 */\n.puzzle-container {\n  height: 100%;\n  width: 100%;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  margin: auto; }\n\n.Puzzle15 .back {\n  fill: #eaeaea; }\n\n.Puzzle15 .chip {\n  cursor: default; }\n  .Puzzle15 .chip .chip-back {\n    fill: #ffa69e;\n    transition-duration: 2s; }\n  .Puzzle15 .chip .chip-edge {\n    stroke: #FF7777;\n    stroke-width: 10;\n    fill: none;\n    transition-duration: 2s; }\n  .Puzzle15 .chip .chip-numb {\n    font-family: \"Roboto\", sans-serif;\n    font-size: 60px;\n    font-weight: bold;\n    fill: #FF5154;\n    text-anchor: middle;\n    alignment-baseline: central;\n    transition-duration: 2s; }\n\n.Puzzle15 .chip.active {\n  cursor: pointer; }\n\n.Puzzle15 .chip.correct .chip-back {\n  fill: #A5FFC7; }\n\n.Puzzle15 .chip.correct .chip-edge {\n  stroke: #11DB8D; }\n\n.Puzzle15 .chip.correct .chip-numb {\n  fill: #2DB773; }\n", ""]);
+
+	// exports
+
+
+/***/ },
 /* 5 */
 /***/ function(module, exports) {
 
@@ -17863,46 +17901,6 @@ webpackJsonp([0,1],[
 		if(oldSrc)
 			URL.revokeObjectURL(oldSrc);
 	}
-
-
-/***/ },
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(8);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(6)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./15puzzle.scss", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./15puzzle.scss");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(5)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "/* Coolors Exported Palette - coolors.co/eaeaea-6bb2a0-a5ffd6-ffa69e-ff6868 */\n.puzzle-container {\n  height: 100%;\n  width: 100%;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  margin: auto; }\n\n.Puzzle15 .back {\n  fill: #eaeaea; }\n\n.Puzzle15 .chip {\n  cursor: default; }\n  .Puzzle15 .chip .chip-back {\n    fill: #ffa69e;\n    transition-duration: 2s; }\n  .Puzzle15 .chip .chip-edge {\n    stroke: #FF7777;\n    stroke-width: 10;\n    fill: none;\n    transition-duration: 2s; }\n  .Puzzle15 .chip .chip-numb {\n    font-family: Roboto, sans-serif;\n    font-size: 60px;\n    font-weight: bold;\n    fill: #FF5154;\n    text-anchor: middle;\n    alignment-baseline: central;\n    transition-duration: 2s; }\n\n.Puzzle15 .chip.active {\n  cursor: pointer; }\n\n.Puzzle15 .chip.correct .chip-back {\n  fill: #A5FFC7; }\n\n.Puzzle15 .chip.correct .chip-edge {\n  stroke: #11DB8D; }\n\n.Puzzle15 .chip.correct .chip-numb {\n  fill: #2DB773; }\n", ""]);
-
-	// exports
 
 
 /***/ }

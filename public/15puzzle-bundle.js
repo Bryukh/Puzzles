@@ -22,8 +22,6 @@ webpackJsonp([0,1],[
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	__webpack_require__(3);
-
 	__webpack_require__(7);
 
 	var N = 4;
@@ -126,15 +124,15 @@ webpackJsonp([0,1],[
 	                        y = chip.data().y,
 	                        vShift = dirShifts[k][1],
 	                        hShift = dirShifts[k][0];
-	                    chip.animate({ "transform": 't' + hShift + ',' + vShift }, obj.cfg.stepTime, (function () {
-	                        this.bindEvents();
-	                    }).bind(obj));
+	                    chip.animate({ "transform": 't' + hShift + ',' + vShift }, _this.cfg.stepTime, function () {
+	                        return _this.bindEvents();
+	                    });
 	                    chip.data({ x: x + hShift, y: y + vShift });
-	                    obj.state[obj.free] = numb;
-	                    obj.state[pos] = 0;
-	                    obj.free = pos;
+	                    _this.state[_this.free] = numb;
+	                    _this.state[pos] = 0;
+	                    _this.free = pos;
 	                    for (var c = 1, C = N * N; c < C; c++) {
-	                        var ch = obj.chips[c];
+	                        var ch = _this.chips[c];
 	                        ch.unclick();
 	                        ch.removeClass("active");
 	                    }
@@ -17556,46 +17554,8 @@ webpackJsonp([0,1],[
 
 
 /***/ },
-/* 3 */
-/***/ function(module, exports, __webpack_require__) {
-
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(4);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(6)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./_common.scss", function() {
-				var newContent = require("!!./../../../node_modules/css-loader/index.js!./../../../node_modules/sass-loader/index.js!./_common.scss");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
-
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	exports = module.exports = __webpack_require__(5)();
-	// imports
-
-
-	// module
-	exports.push([module.id, ".puzzle-container {\n  height: 100%;\n  width: 100%;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  margin: auto; }\n", ""]);
-
-	// exports
-
-
-/***/ },
+/* 3 */,
+/* 4 */,
 /* 5 */
 /***/ function(module, exports) {
 

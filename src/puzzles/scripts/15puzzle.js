@@ -1,7 +1,6 @@
 import Snap from 'snapsvg';
 import $ from 'jquery';
 
-import "./../styles/_common.scss";
 import "./../styles/15puzzle.scss";
 
 const N = 4;
@@ -103,23 +102,21 @@ class Puzzle {
                 chip = this.chips[numb],
                 obj = this;
             chip.addClass("active");
-            chip.click(function (e) {
+            chip.click((e) => {
                 let x = chip.data().x,
                     y = chip.data().y,
                     vShift = dirShifts[k][1],
                     hShift = dirShifts[k][0];
                 chip.animate({"transform": `t${hShift},${vShift}`}, 
-                    obj.cfg.stepTime,
-                    function () {
-                        this.bindEvents();
-                    }.bind(obj)
+                    this.cfg.stepTime,
+                    () => this.bindEvents()
                 );
                 chip.data({x: x + hShift, y: y + vShift});
-                obj.state[obj.free] = numb;
-                obj.state[pos] = 0;
-                obj.free = pos;
+                this.state[this.free] = numb;
+                this.state[pos] = 0;
+                this.free = pos;
                 for (let c = 1, C = N * N; c < C; c++) {
-                    let ch = obj.chips[c];
+                    let ch = this.chips[c];
                     ch.unclick();
                     ch.removeClass("active");
                 }

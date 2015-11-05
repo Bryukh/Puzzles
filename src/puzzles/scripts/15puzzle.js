@@ -37,14 +37,35 @@ class Puzzle {
         // Chips
         this.chips = [];
         this.state = {};
-        for (let i = 1; i < N * N; i++) {
-            let chip = this.makeChip(i, i);
-            chip.addClass("correct");
-            this.chips[i] = chip;
-            this.state[i] = i;
+        let randAr = this.randomState();
+        for (let i = 0; i < randAr.length; i++) {
+            let numb = randAr[i],
+                pos = i + 1;
+            let chip = this.makeChip(numb, pos);
+            if (pos === numb) {
+                chip.addClass("correct");
+            }
+            this.chips[numb] = chip;
+            this.state[pos] = numb;
         }
         this.free = 16;
         this.bindEvents();
+    }
+
+    randomState() {
+        while (true){
+            let ar = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+            ar.sort(() => Math.random() > 0.5);
+            let parity = 0;
+            for (let i = 0; i < ar.length; i++) {
+                for (let j = i + 1; j < ar.length; j++) {
+                    parity += ar[i] > ar[j] ? 1 : 0;
+                }
+            }
+            if (parity % 2 === 0) {
+                return ar;
+            }
+        }
     }
 
     makeChip(number, position) {

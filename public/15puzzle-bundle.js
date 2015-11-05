@@ -63,14 +63,38 @@ webpackJsonp([0,1],[
 	            // Chips
 	            this.chips = [];
 	            this.state = {};
-	            for (var i = 1; i < N * N; i++) {
-	                var chip = this.makeChip(i, i);
-	                chip.addClass("correct");
-	                this.chips[i] = chip;
-	                this.state[i] = i;
+	            var randAr = this.randomState();
+	            for (var i = 0; i < randAr.length; i++) {
+	                var numb = randAr[i],
+	                    pos = i + 1;
+	                var chip = this.makeChip(numb, pos);
+	                if (pos === numb) {
+	                    chip.addClass("correct");
+	                }
+	                this.chips[numb] = chip;
+	                this.state[pos] = numb;
 	            }
 	            this.free = 16;
 	            this.bindEvents();
+	        }
+	    }, {
+	        key: 'randomState',
+	        value: function randomState() {
+	            while (true) {
+	                var ar = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+	                ar.sort(function () {
+	                    return Math.random() > 0.5;
+	                });
+	                var parity = 0;
+	                for (var i = 0; i < ar.length; i++) {
+	                    for (var j = i + 1; j < ar.length; j++) {
+	                        parity += ar[i] > ar[j] ? 1 : 0;
+	                    }
+	                }
+	                if (parity % 2 === 0) {
+	                    return ar;
+	                }
+	            }
 	        }
 	    }, {
 	        key: 'makeChip',

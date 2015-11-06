@@ -3,10 +3,14 @@ var webpack = require("webpack");
 module.exports = {
 
     entry: {
-        "15puzzle": "./src/puzzles/scripts/15puzzle.js"
+        "app": "./src/app.js"
     },
-    output: { filename: "public/[name]-bundle.js" },
-    plugins: [ new webpack.optimize.CommonsChunkPlugin("init", "public/init.js", Infinity) ],
+    output: {
+        path: __dirname + "/public/",
+        filename: "[name].js",
+        publicPath: "/public/"
+    },
+    //plugins: [ new webpack.optimize.CommonsChunkPlugin("init", "public/init.js", Infinity) ],
     module: {
         loaders: [
             {

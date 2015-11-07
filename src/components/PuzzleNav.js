@@ -16,7 +16,7 @@ class PuzzleNav extends React.Component {
                         <li><a href="#">Catalog</a></li>
                     </ul>
                     <ul className="nav navbar-nav navbar-right">
-                        <button className="btn navbar-btn" type="button" onClick={this.handleReset.bind(this)}> Reset </button>
+                        <button className="btn navbar-btn btn-lg" type="button" onClick={this.handleReset.bind(this)}> Reset </button>
                     </ul>
 
                 </div>

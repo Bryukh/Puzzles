@@ -61,7 +61,7 @@ class PuzzleSVG {
     randomState() {
         while (true){
             let ar = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-            ar.sort(() => Math.random() > 0.5);
+            ar.sort(() => Math.random() > 0.5 ? 1 : -1);
             let parity = 0;
             for (let i = 0; i < ar.length; i++) {
                 for (let j = i + 1; j < ar.length; j++) {
@@ -178,7 +178,7 @@ class PuzzleSVG {
 class Puzzle extends React.Component {
     reset() {
         this.svg.remove();
-        this.svg.create();
+
     }
 
     render() {

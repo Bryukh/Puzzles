@@ -178,6 +178,7 @@ class PuzzleSVG {
 class Puzzle extends React.Component {
     reset() {
         this.svg.remove();
+        this.svg.create();
 
     }
 

@@ -26,6 +26,10 @@ class PuzzleSVG {
         this.container.appendChild(svg);
     }
 
+    remove() {
+        this.container.removeChild(document.getElementById("puzzle_svg"));
+    }
+
     create() {
         this.prepareSvg();
 
@@ -172,6 +176,11 @@ class PuzzleSVG {
 
 
 class Puzzle extends React.Component {
+    reset() {
+        this.svg.remove();
+        this.svg.create();
+    }
+
     render() {
         return (
             <div className="row">
@@ -183,8 +192,8 @@ class Puzzle extends React.Component {
     }
     
     componentDidMount() {
-        let p = new PuzzleSVG("puzzle");
-        p.create();
+        this.svg = new PuzzleSVG("puzzle");
+        this.svg.create();
     }
 }
 

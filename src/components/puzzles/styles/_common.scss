@@ -6,24 +6,47 @@ $fontFamily: 'Roboto', sans-serif;
 
 body {
   background-color: $colorGrey;
-  padding-top: 70px;
 }
 
 .navbar {
   background-color: $color-work-1;
   * {
     color: $color-work-4 !important;
-    font-size: 18px !important;
   }
 
   .navbar-brand {
     font-size: 30px !important;
   }
 
+  .container {
+    text-align: center;
+  }
+
   .navbar-btn {
     background-color: $color-work-2;
   }
 
+  .circle-fa {
+    display: inline-block;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    background-color: $color-work-2;
+    .fa {
+      font-size: 60px;
+      padding-top: 20px;
+      color: $color-work-4;
+    }
+  }
+
+  .title {
+    display: inline-block;
+    height: 100px;
+    padding-top: 30px;
+    padding-left: 20px;
+    padding-right: 5px;
+    font-size: 80px;
+  }
 }
 
 .puzzle-container {

@@ -2,25 +2,29 @@ import React from 'react';
 
 class PuzzleNav extends React.Component {
 
-    handleReset() {
+    handleReset(e) {
+        e.preventDefault();
         this.props.onReset();
     }
 
     render() {
         return (
-            <header className="navbar navbar-fixed-top navbar-default">
+            <nav className="navbar navbar-default">
                 <div className="container">
+                    <ul className="nav navbar-nav" style={{"float": "none", display: "inline-block"}}>
+                        <li><a href="#"><span className="circle-fa"><i className="fa fa-arrow-left"></i></span></a></li>
+                        <li className="navbar-brand">
+                            <span className="title">{this.props.title}</span>
+                        </li>
+                        <li><a href="#" onClick={this.handleReset.bind(this)}>
+                            <span className="circle-fa"><i className="fa fa-refresh"></i></span>
+                        </a></li>
+                    </ul>
 
-                    <div className="navbar-brand">{this.props.title}</div>
-                    <ul className="nav navbar-nav navbar-left">
-                        <li><a href="#">Catalog</a></li>
-                    </ul>
-                    <ul className="nav navbar-nav navbar-right">
-                        <button className="btn navbar-btn btn-lg" type="button" onClick={this.handleReset.bind(this)}> Reset </button>
-                    </ul>
 
                 </div>
-            </header>
+            </nav>
+
         )
     }
 }

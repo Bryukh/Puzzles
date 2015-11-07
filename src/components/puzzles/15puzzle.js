@@ -185,7 +185,7 @@ class Puzzle extends React.Component {
     render() {
         return (
             <div className="row">
-                <div className="col-xs-12 col-md-6 col-md-offset-3">
+                <div className="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
                     <div className="container puzzle-container text-center Puzzle15" id="puzzle"></div>
                 </div>
             </div>

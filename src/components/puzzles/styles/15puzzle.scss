@@ -12,12 +12,12 @@ $stepTime: 200ms;
 
     cursor: default;
     .chip-back {
-      fill: $colorLightRed;
+      fill: $color-danger-1;
       transition-duration: $stepTime;
       transition-property: fill;
     }
     .chip-edge {
-      stroke: $colorMiddleRed;
+      stroke: $color-danger-2;
       stroke-width: 10;
       fill: none;
       transition-duration: $stepTime;
@@ -33,7 +33,7 @@ $stepTime: 200ms;
       font-family: $fontFamily;
       font-size: 60px;
       //font-weight: bold;
-      fill: $colorDarkRed;
+      fill: $color-danger-3;
       text-anchor: middle;
       alignment-baseline: central;
       transition-duration: $stepTime;
@@ -52,15 +52,15 @@ $stepTime: 200ms;
 
   .chip.correct {
     .chip-back {
-      fill: $colorLightGreen;
+      fill: $color-calm-1;
 
     }
     .chip-edge {
-      stroke: $colorMiddleGreen;
+      stroke: $color-calm-2;
 
     }
     .chip-numb {
-      fill: $colorDarkGreen;
+      fill: $color-calm-4;
 
     }
   }

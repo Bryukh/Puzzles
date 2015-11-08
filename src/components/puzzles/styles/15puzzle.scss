@@ -36,6 +36,7 @@ $stepTime: 200ms;
       fill: $color-danger-3;
       text-anchor: middle;
       alignment-baseline: central;
+      dominant-baseline: central;
       transition-duration: $stepTime;
       transition-property: fill;
 

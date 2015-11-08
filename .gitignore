@@ -87,5 +87,6 @@ crashlytics-build.properties
 
 # build
 
+*.sh
 public/*
 gh-pages

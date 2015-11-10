@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Snap from 'snapsvg';
-import $ from 'jquery';
 
 require("../../../styles/15puzzle.scss");
 
@@ -131,7 +130,7 @@ class PuzzleSVG {
                 right: [-shift, 0]
             };
         for (let k in nears) {
-            if (!nears.hasOwnProperty(k) || !nears[k]) {continue}
+            if (!nears.hasOwnProperty(k) || !nears[k]) {continue;}
             let pos = nears[k],
                 numb = this.state[pos],
                 chip = this.chips[numb];
@@ -166,7 +165,7 @@ class PuzzleSVG {
                     ch.unmousedown();
                     ch.removeClass("active");
                 }
-            })
+            });
         }
 
     }
@@ -186,12 +185,13 @@ class Puzzle extends React.Component {
         return (
             <div className="row">
                 <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
-                    <div className="container puzzle-container text-center Puzzle15" id="puzzle"></div>
+                    <div className="container puzzle-container text-center Puzzle15" id="puzzle">
+                    </div>
                 </div>
             </div>
         )
     }
-    
+
     componentDidMount() {
         this.svg = new PuzzleSVG("puzzle");
         this.svg.create();

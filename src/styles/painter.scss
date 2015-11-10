@@ -1,0 +1,22 @@
+
+@import "palette";
+
+.painter-puzzle {
+    svg {
+        padding: 5px;
+    }
+
+    rect.cell {
+        fill: $color-work-1;
+        stroke: $color-work-3;
+        stroke-width: 5px;
+        width: 100px;
+        height: 100px;
+    }
+
+    rect.cell.painted {
+        fill: $color-work-2;
+        transition-property: fill;
+        transition-duration: 500ms;
+    }
+}

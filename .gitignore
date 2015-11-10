@@ -90,3 +90,7 @@ crashlytics-build.properties
 *.sh
 public/*
 gh-pages
+
+# Linters
+
+.jshintrc

@@ -10,7 +10,10 @@ module.exports = {
         filename: "[name].js",
         publicPath: "/public/"
     },
-    //plugins: [ new webpack.optimize.CommonsChunkPlugin("init", "public/init.js", Infinity) ],
+    plugins: [
+        //new webpack.optimize.CommonsChunkPlugin("init", "public/init.js", Infinity)
+        new webpack.NoErrorsPlugin()
+    ],
     module: {
         loaders: [
             {

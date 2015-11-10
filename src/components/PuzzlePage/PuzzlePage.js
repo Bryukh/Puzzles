@@ -2,6 +2,8 @@ import React from 'react';
 import PuzzleNav from './PuzzleNav'
 
 
+require("../../styles/puzzle-page.scss");
+
 var PuzzlePage = React.createClass({
 
 

@@ -3,7 +3,7 @@ import React from 'react';
 import Snap from 'snapsvg';
 import $ from 'jquery';
 
-import "./styles/15puzzle.scss";
+require("../../../styles/15puzzle.scss");
 
 const N = 4;
 

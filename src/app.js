@@ -2,7 +2,7 @@ import React from 'react';
 import {render} from 'react-dom';
 import {Router, Route} from 'react-router';
 import Main from "./components/Main";
-import PuzzlePage from "./components/PuzzlePage";
+import PuzzlePage from "./components/PuzzlePage/PuzzlePage";
 
 render(
     (

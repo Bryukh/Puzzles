@@ -198,5 +198,7 @@ class Puzzle extends React.Component {
     }
 }
 
+Puzzle.title = "15 Puzzle";
+
 
 export default Puzzle;

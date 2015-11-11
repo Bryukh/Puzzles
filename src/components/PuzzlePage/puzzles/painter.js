@@ -174,5 +174,6 @@ class Puzzle extends React.Component {
     }
 }
 
+Puzzle.title = "Painter";
 
 export default Puzzle;

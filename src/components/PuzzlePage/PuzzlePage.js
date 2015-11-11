@@ -17,7 +17,7 @@ var PuzzlePage = React.createClass({
         let Puzzle = require(puzzlePath);
         return (
             <div>
-                <PuzzleNav title={this.props.params.title} onReset={this.resetPuzzle} />
+                <PuzzleNav title={Puzzle.title} onReset={this.resetPuzzle} />
                 <Puzzle ref="puzzle" />
             </div>
         );

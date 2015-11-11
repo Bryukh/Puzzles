@@ -1,0 +1,28 @@
+@import "common";
+@import "palette";
+
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background-color: $color-work-1;
+  text-align: center;
+
+  p {
+    padding-top: 20px;
+    font-size: 1.2em;
+  }
+}
+
+.jumbotron {
+  background-color: $color-work-1;
+
+}
+
+.image-description {
+  img {
+    width: 100%;
+  }
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "slug": "15puzzle",
+    "short": "SLIDING!",
+    "imageURL": "15puzzle.png",
+    "title": "15 Puzzle"
+  },
+  {
+    "slug": "painter",
+    "short": "PAINTER!",
+    "imageURL": "painter.png",
+    "title": "Painter"
+  }
+]

@@ -16,7 +16,7 @@ var Main = React.createClass({
                 <a href={`#/puzzle/${info.slug}`} key={index}>
                     <div className="col-xs-6 col-sm-4 col-md-3 text-center">
                         <div className="image-description">
-                            <img src={`/images/${imageURL}`} alt={info.title}/>
+                            <img src={`./images/${imageURL}`} alt={info.title}/>
                         </div>
                         <h1>{info.title}</h1>
                     </div>

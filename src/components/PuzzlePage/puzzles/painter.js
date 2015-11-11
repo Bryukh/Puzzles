@@ -5,7 +5,11 @@ import "../../../styles/painter.scss";
 class Rect extends React.Component {
     render() {
         return (
-            <rect {...this.props} className={"cell " + (this.props.isPainted ? "painted" : "")} />
+            <rect {...this.props}
+                className={"cell " + (this.props.isPainted ? "painted" : "")}
+                onMouseEnter={this.props.mouseIn}
+                onMouseOut={this.props.mouseOut}
+                onMouseDown={this.props.mouseDown} />
         )
     }
 }
@@ -14,8 +18,11 @@ class Puzzle extends React.Component {
 
     constructor() {
         super();
+        this.mouseDown = false;
         this.state = {
-            field: [],
+            field: {},
+            initField: {},
+            isWin: false,
             SIZE: 5,
             PAINTED: 2,
             baseSize: 100
@@ -24,54 +31,106 @@ class Puzzle extends React.Component {
 
     componentWillMount() {
         const N = this.state.SIZE;
-        let temp = [];
+        let field = {};
         for (let i = 0; i < N; i++) {
-            let row = [];
             for (let j = 0; j < N; j++) {
-                row.push(0);
+                field[`${i}-${j}`] = 0;
             }
-            temp.push(row);
         }
 
         for (let i = 0; i < this.state.PAINTED; i++) {
             let row = Math.floor(Math.random() * N);
             let col = Math.floor(Math.random() * N);
-            temp[row][col] = 1;
+            field[`${row}-${col}`] = 1;
         }
-        this.setState({field: temp});
-    }
-
-    componentDidMount() {
-        setInterval(() => {
-            const N = this.state.SIZE;
-            let row = Math.floor(Math.random() * N);
-            let col = Math.floor(Math.random() * N);
-            let tempField = this.state.field;
-            tempField[row][col] = 1 - tempField[row][col];
-            this.setState({field: tempField})
-
-        }, 1000);
+        this.setState({initField: field});
+        this.clear(field);
     }
 
     reset() {
-        this.svg.remove();
-        this.svg.create();
+        this.clear();
+        this.mouseDown = false;
+        this.setState({isWin: false});
+    }
+
+    clear(initField) {
+        initField = initField || this.state.initField;
+        let field = this.state.field;
+        for (let k of Object.keys(initField)) {
+            field[k] = initField[k];
+        }
+        this.setState({field: field});
+    }
+
+    handleCursorIn(coor, e) {
+        if (this.mouseDown) {
+            let currentField = this.state.field;
+            if (currentField[coor]) {
+                this.gameOver();
+            }
+            else {
+                currentField[coor] = 1;
+                this.setState({field: currentField});
+                this.checkWin();
+            }
+        }
+    }
+
+    handleCursorOut(coor, e) {
+    }
+
+
+    handleCursorOutSVG(e) {
+        this.gameOver();
+    }
+
+    handleMouseDown(coor, e) {
+        this.mouseDown = true;
+        let currentField = this.state.field;
+        currentField[coor] = 1;
+        this.setState({field: currentField});
+    }
+
+    checkWin() {
+        let result = true;
+        let field = this.state.field;
+        for (let k of Object.keys(field)) {
+            result = result && field[k];
+        }
+        if (result) {
+            console.log("WIN");
+            this.setState({isWin: true});
+        };
+    }
+
+    gameOver() {
+        this.mouseDown = false;
+        if (this.state.isWin) {
+            return;
+        }
+        this.clear()
 
     }
 
+
     render() {
         let base = this.state.baseSize;
-        var rects = this.state.field.map((row, rowIndex) => {
-            return row.map((el, colIndex) => {
-                return <Rect x={colIndex * base} y={rowIndex * base} key={rowIndex + "-" + colIndex} isPainted={el} />
-            })
+        var rects = Object.keys(this.state.field).map((coor) => {
+            let [row, col] = coor.split("-").map((x) => Number(x));
+            return <Rect x={col * base}
+                y={row * base}
+                key={coor}
+                isPainted={this.state.field[coor]}
+                mouseIn={this.handleCursorIn.bind(this, coor)}
+                mouseOut={this.handleCursorOut.bind(this, coor)}
+                mouseDown={this.handleMouseDown.bind(this, coor)} />
         });
         let viewBox = base * this.state.SIZE;
         return (
             <div className="row">
                 <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
                     <div className="container puzzle-container text-center painter-puzzle" id="puzzle">
-                        <svg viewBox={`0 0 ${viewBox} ${viewBox}`}>
+                        <svg viewBox={`0 0 ${viewBox} ${viewBox}`}  onMouseLeave={this.handleCursorOutSVG.bind(this)}>
                             {rects}
                         </svg>
                     </div>

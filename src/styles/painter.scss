@@ -4,6 +4,7 @@
 .painter-puzzle {
     svg {
         padding: 5px;
+        pointer-events: all;
     }
 
     rect.cell {
@@ -12,11 +13,18 @@
         stroke-width: 5px;
         width: 100px;
         height: 100px;
+        cursor: pointer;
     }
 
     rect.cell.painted {
         fill: $color-work-2;
         transition-property: fill;
         transition-duration: 500ms;
+    }
+
+    rect.frame {
+        fill: none;
+        stroke-width: 5px;
+        stroke: $color-work-4;
     }
 }

@@ -9,7 +9,8 @@ class Rect extends React.Component {
                 className={"cell " + (this.props.isPainted ? "painted" : "")}
                 onMouseEnter={this.props.mouseIn}
                 onMouseOut={this.props.mouseOut}
-                onMouseDown={this.props.mouseDown} />
+                onMouseDown={this.props.mouseDown}
+                onMouseUp={this.props.mouseUp} />
         )
     }
 }
@@ -91,6 +92,10 @@ class Puzzle extends React.Component {
         this.setState({field: currentField});
     }
 
+    handleMouseUp(e) {
+        this.gameOver();
+    }
+
     checkWin() {
         let result = true;
         let field = this.state.field;
@@ -123,7 +128,8 @@ class Puzzle extends React.Component {
                 isPainted={this.state.field[coor]}
                 mouseIn={this.handleCursorIn.bind(this, coor)}
                 mouseOut={this.handleCursorOut.bind(this, coor)}
-                mouseDown={this.handleMouseDown.bind(this, coor)} />
+                mouseDown={this.handleMouseDown.bind(this, coor)}
+                mouseUp={this.handleMouseUp.bind(this)} />
         });
         let viewBox = base * this.state.SIZE;
         return (

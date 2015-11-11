@@ -10,6 +10,9 @@ class Rect extends React.Component {
                 onMouseEnter={this.props.mouseIn}
                 onMouseOut={this.props.mouseOut}
                 onMouseDown={this.props.mouseDown}
+                onTouchStart={this.props.touchDown}
+                onTouchEnd={this.props.mouseUp}
+                onTouchMove={this.props.touchMove}
                 onMouseUp={this.props.mouseUp} />
         )
     }
@@ -48,6 +51,10 @@ class Puzzle extends React.Component {
         this.clear(field);
     }
 
+    componentDidMount() {
+        this.svg = document.getElementById("puzzleSvg");
+    }
+
     reset() {
         this.clear();
         this.mouseDown = false;
@@ -80,6 +87,24 @@ class Puzzle extends React.Component {
     handleCursorOut(coor, e) {
     }
 
+    handleTouchDown(coor, e) {
+        this.currentCoor = coor;
+        this.handleMouseDown(coor, e);
+    }
+
+    handleTouchMove(initCoor, e) {
+        e.preventDefault();
+        let svgRect = this.svg.getBoundingClientRect();
+        let base = svgRect.width / this.state.SIZE;
+        let col = Math.floor((e.touches[0].pageX - svgRect.left) / base);
+        let row = Math.floor((e.touches[0].pageY - svgRect.top) / base);
+        let coor = `${row}-${col}`;
+
+        if (this.currentCoor !== coor) {
+            this.handleCursorIn(coor, e);
+            this.currentCoor = coor;
+        }
+    }
 
     handleCursorOutSVG(e) {
         this.gameOver();
@@ -93,6 +118,7 @@ class Puzzle extends React.Component {
     }
 
     handleMouseUp(e) {
+        e.preventDefault();
         this.gameOver();
     }
 
@@ -105,7 +131,7 @@ class Puzzle extends React.Component {
         if (result) {
             console.log("WIN");
             this.setState({isWin: true});
-        };
+        }
     }
 
     gameOver() {
@@ -129,6 +155,8 @@ class Puzzle extends React.Component {
                 mouseIn={this.handleCursorIn.bind(this, coor)}
                 mouseOut={this.handleCursorOut.bind(this, coor)}
                 mouseDown={this.handleMouseDown.bind(this, coor)}
+                touchDown={this.handleTouchDown.bind(this, coor)}
+                touchMove={this.handleTouchMove.bind(this, coor)}
                 mouseUp={this.handleMouseUp.bind(this)} />
         });
         let viewBox = base * this.state.SIZE;
@@ -136,7 +164,7 @@ class Puzzle extends React.Component {
             <div className="row">
                 <div className="col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
                     <div className="container puzzle-container text-center painter-puzzle" id="puzzle">
-                        <svg viewBox={`0 0 ${viewBox} ${viewBox}`}  onMouseLeave={this.handleCursorOutSVG.bind(this)}>
+                        <svg id="puzzleSvg" viewBox={`0 0 ${viewBox} ${viewBox}`}  onMouseLeave={this.handleCursorOutSVG.bind(this)}>
                             {rects}
                         </svg>
                     </div>

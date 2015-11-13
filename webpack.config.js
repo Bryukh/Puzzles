@@ -8,7 +8,7 @@ module.exports = {
     output: {
         path: __dirname + "/public/",
         filename: "[name].js",
-        publicPath: "/public/"
+        publicPath: "./public/"
     },
     plugins: [
         //new webpack.optimize.CommonsChunkPlugin("init", "public/init.js", Infinity)

@@ -10,7 +10,6 @@ import "../styles/main.scss";
 var Main = React.createClass({
     render: function () {
         let blocks = puzzles.map((info, index) => {
-            console.log(info);
             let imageURL = (info.imageURL && info.imageURL.length) ? info.imageURL : "default.png";
             return (
                 <a href={`#/puzzle/${info.slug}`} key={index}>

@@ -9,13 +9,16 @@ class PuzzlePage extends React.Component {
     constructor() {
         super();
         this.state = {
-            puzzleComponent: null
+            puzzleComponent: null,
+            resetFunc: null
         }
 
     }
 
     resetPuzzle() {
-        this.refs.puzzle.reset();
+        if (this.refs.puzzle) {
+            this.refs.puzzle.reset();
+        }
     }
 
     componentWillMount() {
@@ -27,10 +30,10 @@ class PuzzlePage extends React.Component {
 
     render() {
         let Puzzle = this.state.puzzleComponent;
-
         return (
             <div>
-                <PuzzleNav title={Puzzle ? Puzzle.title : "Loading..."} onReset={this.resetPuzzle}/>
+                <PuzzleNav title={Puzzle ? Puzzle.title : "Loading..."}
+                           onReset={this.resetPuzzle.bind(this)}/>
                 {Puzzle ? <Puzzle ref="puzzle"/> : ""}
             </div>
         );
